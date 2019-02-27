@@ -15,7 +15,7 @@ SectionVendorTokens."sof_buffer_tokens" {
 }
 
 SectionVendorTokens."sof_dai_tokens" {
-	SOF_TKN_DAI_DMAC_CONFIG			"153"
+#	SOF_TKN_DAI_DMAC_CONFIG			"153"
 	SOF_TKN_DAI_TYPE			"154"
 	SOF_TKN_DAI_INDEX			"155"
 	SOF_TKN_DAI_DIRECTION			"156"
@@ -48,16 +48,11 @@ SectionVendorTokens."sof_comp_tokens" {
 	SOF_TKN_COMP_PERIOD_SINK_COUNT		"400"
 	SOF_TKN_COMP_PERIOD_SOURCE_COUNT	"401"
 	SOF_TKN_COMP_FORMAT			"402"
-	SOF_TKN_COMP_PRELOAD_COUNT		"403"
 }
 
 SectionVendorTokens."sof_ssp_tokens" {
-	SOF_TKN_INTEL_SSP_CLKS_CONTROL		"500"
 	SOF_TKN_INTEL_SSP_MCLK_ID		"501"
 	SOF_TKN_INTEL_SSP_SAMPLE_BITS		"502"
-	SOF_TKN_INTEL_SSP_FRAME_PULSE_WIDTH 	"503"
-	SOF_TKN_INTEL_SSP_QUIRKS		"504"
-	SOF_TKN_INTEL_SSP_TDM_PADDING_PER_SLOT  "505"
 }
 
 SectionVendorTokens."sof_dmic_tokens" {
