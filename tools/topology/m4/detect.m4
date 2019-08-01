@@ -40,6 +40,7 @@ define(`W_DETECT',
 `	no_pm "true"'
 `	event_flags	"15"' # trapping PRE/POST_PMU/PMD events
 `	event_type	"1"' # 1 for DAPM event for detect component
+`	ignore_suspend	"1"'
 `	data ['
 `		"'N_DETECT($1)`_data_w"'
 `		"'N_DETECT($1)`_data_str"'
