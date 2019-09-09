@@ -20,10 +20,11 @@ static inline void arch_wait_for_interrupt(int level)
 {
 	int i;
 
+#if !(CONFIG_CAVS_LPS)
 	/* can only enter WFI when at run level 0 i.e. not IRQ level */
 	if (arch_interrupt_get_level() > 0)
 		panic(SOF_IPC_PANIC_WFI);
-
+#endif
 	/* this sequence must be atomic on LX6 */
 	XTOS_SET_INTLEVEL(5);
 
