@@ -21,6 +21,7 @@
 #include <sof/sof.h>
 #include <ipc/topology.h>
 #include <errno.h>
+#include <stddef.h>
 #include <stdint.h>
 
 #if STATIC_PIPE
@@ -52,7 +53,7 @@ enum task_state task_main_master_core(void *data)
 	return SOF_TASK_STATE_COMPLETED;
 }
 
-void task_main_init(struct sof *sof)
+void task_main_init(void)
 {
 	struct task **main_task = task_main_get();
 	int cpu = cpu_get_id();
@@ -62,7 +63,7 @@ void task_main_init(struct sof *sof)
 	*main_task = rzalloc(RZONE_SYS, SOF_MEM_CAPS_RAM, sizeof(**main_task));
 
 	assert(!schedule_task_init(*main_task, SOF_SCHEDULE_EDF,
-				   SOF_TASK_PRI_IDLE, main_main, sof, cpu,
+				   SOF_TASK_PRI_IDLE, main_main, NULL, cpu,
 				   SOF_SCHEDULE_FLAG_IDLE));
 }
 
