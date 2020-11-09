@@ -48,21 +48,21 @@ struct pdm_decim *fir_list[] = {
 	&pdm_decim_int32_02_4375_5100_010_095,
 	&pdm_decim_int32_02_4288_5100_010_095,
 #endif
-#if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_3
-	&pdm_decim_int32_03_4375_5100_010_095,
-	&pdm_decim_int32_03_3850_5100_010_095,
-#endif
 #if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_4
 	&pdm_decim_int32_04_4375_5100_010_095,
-#endif
-#if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_5
-	&pdm_decim_int32_05_4331_5100_010_095,
 #endif
 #if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_6
 	&pdm_decim_int32_06_4156_5100_010_095,
 #endif
 #if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_8
 	&pdm_decim_int32_08_4156_5380_010_090,
+#endif
+#if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_3
+	&pdm_decim_int32_03_4375_5100_010_095,
+	&pdm_decim_int32_03_3850_5100_010_095,
+#endif
+#if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_5
+	&pdm_decim_int32_05_4331_5100_010_095,
 #endif
 #if CONFIG_INTEL_DMIC_FIR_DECIMATE_BY_12
 	&pdm_decim_int32_12_4156_6018_010_090,

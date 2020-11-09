@@ -355,6 +355,7 @@ static void find_modes(struct dai *dai,
 			    mcic >= DMIC_HW_CIC_DECIM_MIN &&
 			    mcic <= DMIC_HW_CIC_DECIM_MAX &&
 			    i < DMIC_MAX_MODES) {
+				dai_info(dai, "find_modes(): %d %d %d", clkdiv, mcic, mfir);
 				modes->clkdiv[i] = clkdiv;
 				modes->mcic[i] = mcic;
 				modes->mfir[i] = mfir;
@@ -551,12 +552,11 @@ static int select_mode(struct dai *dai,
 	int32_t gain_to_fir;
 	int16_t idx[DMIC_MAX_MODES];
 	int16_t *mfir;
-	int n = 1;
-	int mmin;
 	int count;
 	int mcic;
 	int bits_cic;
 	int ret;
+	int n;
 
 	/* If there are more than one possibilities select a mode with lowest
 	 * FIR decimation factor. If there are several select mode with highest
@@ -579,9 +579,21 @@ static int select_mode(struct dai *dai,
 	else
 		mfir = modes->mfir_b;
 
-	mmin = find_min_int16(mfir, modes->num_of_modes);
-	count = find_equal_int16(idx, mfir, mmin, modes->num_of_modes, 0);
-	n = idx[count - 1];
+	count = 0;
+	for (n = 0; fir_list[n]; n++) {
+		dai_info(dai, "select_mode(): %d", fir_list[n]->decim_factor);
+		count = find_equal_int16(idx, mfir, fir_list[n]->decim_factor,
+					 modes->num_of_modes, 0);
+		if (count > 0)
+			break;
+	}
+
+	if (!count) {
+		dai_err(dai, "select_mode(): Preferred decimation factor find");
+		return -EINVAL;
+	}
+
+	n = idx[count - 1]; /* Option with highest clock divisor and lowest mic clock rate */
 
 	/* Get microphone clock and decimation parameters for used mode from
 	 * the list.
