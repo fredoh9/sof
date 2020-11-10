@@ -1635,12 +1635,12 @@ static int dmic_remove(struct dai *dai)
 	rfree(dai_get_drvdata(dai));
 	dai_set_drvdata(dai, NULL);
 
+	interrupt_disable(dmic->irq, dai);
+	interrupt_unregister(dmic->irq, dai);
+
 	/* The next end tasks must be passed if another DAI FIFO still runs */
 	if (dmic_active_fifos)
 		return 0;
-
-	interrupt_disable(dmic->irq, dai);
-	interrupt_unregister(dmic->irq, dai);
 
 	pm_runtime_put_sync(DMIC_CLK, dai->index);
 	/* Disable DMIC power */
